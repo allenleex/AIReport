@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymysql
 from scrapy import log
-
+import time
 from aireport import settings
 from aireport.items import NewsItem
 
@@ -24,6 +24,7 @@ class AireportPipeline(object):
         self.cursor = self.connect.cursor()
 
     def process_item(self, item, spider):
+        #ISOTIMEFORMAT = '%Y-%m-%d %H:%M:%S'
         if item.__class__ == NewsItem:
             try:
                 self.cursor.execute("""select id from air_news where url = %s""", item["url"])
@@ -35,19 +36,23 @@ class AireportPipeline(object):
                            author = %s,
                            title = %s,
                            url = %s,
+                           ts = %s
                            where url = %s""",
                         (item['source'],
                          item['author'],
                          item['title'],
+                         item['url'],
+                         time.strftime(settings.ISOTIMEFORMAT,time.localtime()),
                          item['url']))
                 else:
                     self.cursor.execute(
-                        """insert into air_news(source,author,title,url)
-                           value (%s,%s,%s,%s)""",
+                        """insert into air_news(source,author,title,url,ts)
+                           value (%s,%s,%s,%s,%s)""",
                         (item['source'],
                          item['author'],
                          item['title'],
-                         item['url']))
+                         item['url'],
+                         time.strftime(settings.ISOTIMEFORMAT,time.localtime())))
                 self.connect.commit()
             except Exception as error:
                 log(error)
