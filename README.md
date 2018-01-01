@@ -1,6 +1,6 @@
 # AIReport
 
-![](Assets/XLua/Doc/xLua.png)
+![](aireport-admin/src/main/webapp/assets/img/logo-2c.png)
 
 [![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/allenleex/AIReport/blob/master/LICENSE.TXT)
 [![release](https://img.shields.io/badge/release-v2.1.10-blue.svg)](https://github.com/allenleex/AIReport/releases)
@@ -9,7 +9,7 @@
 
 ## 项目背景
 
-xLua为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。
+AIReport项目希望通过采集互联网上指定行业的各类数据，为行业人士提供智能分析报告。
 
 ## 工程结构
 
